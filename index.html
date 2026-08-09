@@ -59,6 +59,7 @@
       <div class="type-switch"><button type="button" class="selected" data-type="expense">支出</button><button type="button" data-type="income">収入</button></div>
       <label>金額<input id="amount" type="number" min="1" inputmode="numeric" placeholder="0" required /><span>円</span></label>
       <label>カテゴリー<select id="category"></select></label>
+      <label id="newCategoryRow" hidden>新しいカテゴリ名<input id="newCategoryName" maxlength="18" placeholder="例：コンビニ・学費・服" /></label>
       <label>日付<input id="transactionDate" type="date" required /></label>
       <label>メモ <small>任意</small><input id="memo" maxlength="40" placeholder="例：スーパーで買い物" /></label>
       <button class="primary-button" id="saveTransaction" value="default">保存する</button>
