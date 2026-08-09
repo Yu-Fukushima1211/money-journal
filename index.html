@@ -9,7 +9,7 @@
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="icon.svg" />
     <link rel="stylesheet" href="styles.css" />
-    <style>.planning-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:15px 0}.planning-grid article{background:#fff;border:1px solid #e9e9e3;border-radius:17px;padding:15px}.planning-grid .section-heading{align-items:start}.planning-grid span,.planning-grid small{font-size:10px;color:#6d8078;display:block}.planning-grid strong{font-size:15px;display:block;margin:7px 0 3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.planning-grid small{line-height:1.35}</style>
+    <style>.planning-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:15px 0}.planning-grid article{background:#fff;border:1px solid #e9e9e3;border-radius:17px;padding:15px}.planning-grid .section-heading{align-items:start}.planning-grid span,.planning-grid small{font-size:10px;color:#6d8078;display:block}.planning-grid strong{font-size:15px;display:block;margin:7px 0 3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.planning-grid small{line-height:1.35}.goal-list{display:grid;gap:12px;margin-top:15px}.goal-item{border-top:1px solid #e9e9e3;padding-top:12px}.goal-item>div:first-child{display:flex;justify-content:space-between;gap:12px}.goal-item strong{font-size:13px}.goal-item span,.goal-item b small{font-size:10px;color:#6d8078;font-weight:400}.goal-item b{font-size:13px;white-space:nowrap}.goal-item .progress-track{margin-top:9px;height:7px}</style>
     <title>まいにち家計簿</title>
   </head>
   <body>
@@ -38,10 +38,9 @@
       </section>
 
       <section class="saving-card" aria-label="貯金目標">
-        <div class="section-heading"><div><p class="eyebrow">SAVING GOAL</p><h2 id="goalTitle">貯金目標</h2></div><button class="text-button" id="editGoal">編集</button></div>
-        <div class="goal-numbers"><strong id="savedAmount">¥0</strong><span id="goalAmount">目標 ¥0</span></div>
-        <div class="progress-track"><i id="goalProgress"></i></div>
-        <p class="goal-note" id="goalNote">まずは目標を設定しましょう</p>
+        <div class="section-heading"><div><p class="eyebrow">MONEY GOALS</p><h2>お金の目標</h2></div><button class="text-button" id="addGoal">追加</button></div>
+        <div id="goalList" class="goal-list"></div>
+        <p class="goal-note" id="goalEmpty">目標を追加して、期間内の収支を追いかけましょう。</p>
       </section>
 
       <section class="summary-grid" aria-label="支出の内訳">
@@ -66,6 +65,7 @@
       <label>金額<input id="amount" type="number" min="1" inputmode="numeric" placeholder="0" required /><span>円</span></label>
       <label>カテゴリー<select id="category"></select></label>
       <label id="newCategoryRow" hidden>新しいカテゴリ名<input id="newCategoryName" maxlength="18" placeholder="例：コンビニ・学費・服" /></label>
+      <label>関連する目標 <small>任意</small><select id="goalLink"></select></label>
       <label>日付<input id="transactionDate" type="date" required /></label>
       <label>メモ <small>任意</small><input id="memo" maxlength="40" placeholder="例：スーパーで買い物" /></label>
       <button class="primary-button" id="saveTransaction" value="default">保存する</button>
@@ -73,10 +73,11 @@
     </form></dialog>
 
     <dialog id="goalDialog"><form method="dialog" id="goalForm" class="modal">
-      <div class="modal-header"><h2>貯金目標を設定</h2><button class="close" value="cancel" aria-label="閉じる">×</button></div>
+      <div class="modal-header"><h2>お金の目標を追加</h2><button class="close" value="cancel" aria-label="閉じる">×</button></div>
+      <label>目標の種類<select id="goalTypeInput"><option value="save">期間内に貯める</option><option value="purchase">買うために貯める</option><option value="restore">資産を戻す</option></select></label>
       <label>目標の名前<input id="goalNameInput" maxlength="24" placeholder="例：旅行資金" /></label>
       <label>目標金額<input id="goalTargetInput" type="number" min="1" inputmode="numeric" placeholder="100000" required /><span>円</span></label>
-      <label>現在の貯金額<input id="goalSavedInput" type="number" min="0" inputmode="numeric" placeholder="0" required /><span>円</span></label>
+      <label>開始日<input id="goalStartInput" type="date" required /></label>
       <label>目標期限 <small>任意</small><input id="goalDeadlineInput" type="date" /></label>
       <button class="primary-button" value="default">保存する</button>
     </form></dialog>
