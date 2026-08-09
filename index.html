@@ -59,7 +59,7 @@
     <nav class="bottom-nav"><button class="active">⌂<span>ホーム</span></button><button id="analyticsButton">◔<span>分析</span></button><button id="goalsButton">◎<span>貯金</span></button></nav>
 
     <dialog id="transactionDialog"><form method="dialog" id="transactionForm" class="modal">
-      <div class="modal-header"><h2 id="transactionDialogTitle">明細を追加</h2><button class="close" value="cancel" aria-label="閉じる">×</button></div>
+      <div class="modal-header"><h2 id="transactionDialogTitle">明細を追加</h2><button class="close" type="button" aria-label="閉じる">×</button></div>
       <input type="hidden" id="transactionId" />
       <div class="type-switch"><button type="button" class="selected" data-type="expense">支出</button><button type="button" data-type="income">収入</button></div>
       <label>金額<input id="amount" type="number" min="1" inputmode="numeric" placeholder="0" required /><span>円</span></label>
@@ -73,7 +73,7 @@
     </form></dialog>
 
     <dialog id="goalDialog"><form method="dialog" id="goalForm" class="modal">
-      <div class="modal-header"><h2>お金の目標を追加</h2><button class="close" value="cancel" aria-label="閉じる">×</button></div>
+      <div class="modal-header"><h2>お金の目標を追加</h2><button class="close" type="button" aria-label="閉じる">×</button></div>
       <label>目標の種類<select id="goalTypeInput"><option value="save">期間内に貯める</option><option value="purchase">買うために貯める</option><option value="restore">資産を戻す</option></select></label>
       <label>目標の名前<input id="goalNameInput" maxlength="24" placeholder="例：旅行資金" /></label>
       <label>目標金額<input id="goalTargetInput" type="number" min="1" inputmode="numeric" placeholder="100000" required /><span>円</span></label>
@@ -83,7 +83,7 @@
     </form></dialog>
 
     <dialog id="moneyDialog"><form method="dialog" id="moneyForm" class="modal">
-      <div class="modal-header"><h2>予算と資産を設定</h2><button class="close" value="cancel" aria-label="閉じる">×</button></div>
+      <div class="modal-header"><h2>予算と資産を設定</h2><button class="close" type="button" aria-label="閉じる">×</button></div>
       <p class="settings-note">資産額は今日時点の残高です。入力しても、今月の収入・支出には含まれません。</p>
       <label>今月の支出予算 <small>任意</small><input id="monthlyBudgetInput" type="number" min="0" inputmode="numeric" placeholder="例：50000" /><span>円</span></label>
       <label>現在の資産合計 <small>現金・口座などの合計</small><input id="assetTotalInput" type="number" min="0" inputmode="numeric" placeholder="例：300000" /><span>円</span></label>
@@ -91,7 +91,7 @@
       <button class="primary-button" value="default">保存する</button>
     </form></dialog>
 
-    <dialog id="settingsDialog"><form method="dialog" class="modal"><div class="modal-header"><h2>データ管理</h2><button class="close" value="cancel">×</button></div><p class="settings-note">データはこの端末のブラウザ内に保存されています。</p><button class="secondary-button" id="exportButton" type="button">データをバックアップ</button><label class="import-label">バックアップを復元<input id="importInput" type="file" accept="application/json" /></label><button class="danger-button" id="clearData" type="button">すべてのデータを削除</button></form></dialog>
+    <dialog id="settingsDialog"><form method="dialog" class="modal"><div class="modal-header"><h2>データ管理</h2><button class="close" type="button" aria-label="閉じる">×</button></div><p class="settings-note">データはこの端末のブラウザ内に保存されています。</p><button class="secondary-button" id="exportButton" type="button">データをバックアップ</button><label class="import-label">バックアップを復元<input id="importInput" type="file" accept="application/json" /></label><button class="danger-button" id="clearData" type="button">すべてのデータを削除</button></form></dialog>
     <script src="app.js"></script>
   </body>
 </html>

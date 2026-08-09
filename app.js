@@ -3,6 +3,7 @@ const storeKey = 'money-journal-data-v1';
 const categories = { expense: [['食費','🍚'],['日用品','🧺'],['交通','🚃'],['趣味','🎨'],['交際','☕'],['固定費','🏠'],['医療','💊'],['その他','⋯']], income: [['給与','💼'],['副収入','✨'],['おこづかい','🎁'],['その他','⋯']] };
 let filter = 'all'; let selectedType = 'expense';
 let data = load();
+document.querySelectorAll('.close').forEach(button=>button.onclick=()=>button.closest('dialog').close());
 
 function load(){ const initial={transactions:[],goals:[],goal:{name:'貯金目標',target:0,saved:0,deadline:''},budget:0,assets:{total:0,asOf:'',recordedAt:0},categories:{expense:[],income:[]}}; try { const saved=JSON.parse(localStorage.getItem(storeKey)); if(!saved) return initial; const goals=Array.isArray(saved.goals)?saved.goals:(saved.goal?.target?[{id:'legacy-goal',type:'save',name:saved.goal.name||'貯金目標',target:saved.goal.target,startDate:dateValue(),deadline:saved.goal.deadline||''}]:[]); return {...initial,...saved,goals,assets:{...initial.assets,...saved.assets},categories:{...initial.categories,...saved.categories}}; } catch { return initial; } }
 function persist(){ localStorage.setItem(storeKey, JSON.stringify(data)); }
