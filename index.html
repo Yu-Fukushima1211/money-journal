@@ -9,6 +9,7 @@
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="icon.svg" />
     <link rel="stylesheet" href="styles.css" />
+    <style>.planning-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:15px 0}.planning-grid article{background:#fff;border:1px solid #e9e9e3;border-radius:17px;padding:15px}.planning-grid .section-heading{align-items:start}.planning-grid span,.planning-grid small{font-size:10px;color:#6d8078;display:block}.planning-grid strong{font-size:15px;display:block;margin:7px 0 3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.planning-grid small{line-height:1.35}</style>
     <title>まいにち家計簿</title>
   </head>
   <body>
@@ -29,6 +30,11 @@
         <p>今月の残高</p>
         <strong id="monthlyBalance">¥0</strong>
         <div class="income-expense"><span>収入 <b id="monthlyIncome">¥0</b></span><span>支出 <b id="monthlyExpense">¥0</b></span></div>
+      </section>
+
+      <section class="planning-grid" aria-label="家計の計画と資産">
+        <article><div class="section-heading"><span>今月の予算</span><button class="text-button" id="editBudget">設定</button></div><strong id="budgetValue">未設定</strong><small id="budgetNote">支出の上限を決めましょう</small></article>
+        <article><div class="section-heading"><span>現在の資産</span><button class="text-button" id="editAssets">入力</button></div><strong id="assetValue">未入力</strong><small id="assetNote">収支とは別に管理します</small></article>
       </section>
 
       <section class="saving-card" aria-label="貯金目標">
@@ -71,6 +77,16 @@
       <label>目標の名前<input id="goalNameInput" maxlength="24" placeholder="例：旅行資金" /></label>
       <label>目標金額<input id="goalTargetInput" type="number" min="1" inputmode="numeric" placeholder="100000" required /><span>円</span></label>
       <label>現在の貯金額<input id="goalSavedInput" type="number" min="0" inputmode="numeric" placeholder="0" required /><span>円</span></label>
+      <label>目標期限 <small>任意</small><input id="goalDeadlineInput" type="date" /></label>
+      <button class="primary-button" value="default">保存する</button>
+    </form></dialog>
+
+    <dialog id="moneyDialog"><form method="dialog" id="moneyForm" class="modal">
+      <div class="modal-header"><h2>予算と資産を設定</h2><button class="close" value="cancel" aria-label="閉じる">×</button></div>
+      <p class="settings-note">資産額は今日時点の残高です。入力しても、今月の収入・支出には含まれません。</p>
+      <label>今月の支出予算 <small>任意</small><input id="monthlyBudgetInput" type="number" min="0" inputmode="numeric" placeholder="例：50000" /><span>円</span></label>
+      <label>現在の資産合計 <small>現金・口座などの合計</small><input id="assetTotalInput" type="number" min="0" inputmode="numeric" placeholder="例：300000" /><span>円</span></label>
+      <label>資産を確認した日<input id="assetAsOfInput" type="date" required /></label>
       <button class="primary-button" value="default">保存する</button>
     </form></dialog>
 
