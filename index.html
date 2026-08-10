@@ -10,7 +10,7 @@
     <link rel="apple-touch-icon" href="icon.svg" />
     <link rel="stylesheet" href="styles.css" />
     <style>.planning-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:15px 0}.planning-grid article{background:#fff;border:1px solid #e9e9e3;border-radius:17px;padding:15px}.planning-grid .section-heading{align-items:start}.planning-grid span,.planning-grid small{font-size:10px;color:#6d8078;display:block}.planning-grid strong{font-size:15px;display:block;margin:7px 0 3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.planning-grid small{line-height:1.35}.goal-list{display:grid;gap:12px;margin-top:15px}.goal-item{border-top:1px solid #e9e9e3;padding-top:12px}.goal-item>div:first-child{display:flex;justify-content:space-between;gap:12px}.goal-item strong{font-size:13px}.goal-item span,.goal-item b small{font-size:10px;color:#6d8078;font-weight:400}.goal-item b{font-size:13px;white-space:nowrap}.goal-item .progress-track{margin-top:9px;height:7px}</style>
-    <style>.close{width:36px;height:36px;display:grid;place-items:center;border-radius:8px}.close:focus-visible{outline:2px solid #77b8db;outline-offset:2px}</style>
+    <style>.close{width:36px;height:36px;display:grid;place-items:center;border-radius:8px}.close:focus-visible{outline:2px solid #77b8db;outline-offset:2px}.secondary-view{margin-top:20px}.view-note{color:#6d8078;font-size:12px;line-height:1.6}.asset-main{margin:16px 0;background:#163b2f;color:#fff;padding:21px;border-radius:20px}.asset-main span,.asset-main small{display:block;font-size:11px;color:#c5d7cf}.asset-main strong{display:block;font-size:28px;margin:6px 0}.analysis-list{display:grid;gap:8px;margin-top:18px}.analysis-list article{display:flex;justify-content:space-between;background:#fff;border:1px solid #e9e9e3;border-radius:13px;padding:14px;font-size:13px}body[data-view="goals"] .period-bar,body[data-view="goals"] .hero-card,body[data-view="goals"] .planning-grid,body[data-view="goals"] .summary-grid,body[data-view="goals"] .transactions-section,body[data-view="analysis"] .period-bar,body[data-view="analysis"] .hero-card,body[data-view="analysis"] .planning-grid,body[data-view="analysis"] .saving-card,body[data-view="analysis"] .summary-grid,body[data-view="analysis"] .transactions-section,body[data-view="assets"] .period-bar,body[data-view="assets"] .hero-card,body[data-view="assets"] .planning-grid,body[data-view="assets"] .saving-card,body[data-view="assets"] .summary-grid,body[data-view="assets"] .transactions-section{display:none}@media(max-width:400px){.bottom-nav{gap:9vw}}</style>
     <title>まいにち家計簿</title>
   </head>
   <body>
@@ -54,10 +54,23 @@
         <div id="transactionList" class="transaction-list"></div>
         <p id="emptyState" class="empty-state">まだ記録がありません。<br>＋ を押して最初の明細を追加しましょう。</p>
       </section>
+
+      <section id="analysisView" class="secondary-view" hidden>
+        <p class="eyebrow">ANALYSIS</p><h2>支出を振り返る</h2>
+        <p class="view-note">今月、どこにお金を使っているかを確認できます。</p>
+        <div id="categoryAnalysis" class="analysis-list"></div>
+      </section>
+
+      <section id="assetsView" class="secondary-view" hidden>
+        <div class="section-heading"><div><p class="eyebrow">ASSETS</p><h2>資産全体</h2></div><button class="text-button" id="setupAssets">設定</button></div>
+        <p class="view-note">現在の実残高を基準に、開始日からの収支を反映します。</p>
+        <div class="asset-main"><span>現在の資産</span><strong id="assetCurrentValue">未設定</strong><small id="assetCurrentNote">最初に現在の資産を入力してください</small></div>
+        <div class="summary-grid"><article><span>管理開始時の資産</span><strong id="assetOpeningValue">—</strong><small id="assetOpeningNote">開始日を設定すると計算されます</small></article><article><span>開始からの純増減</span><strong id="assetChangeValue">—</strong><small id="assetChangeNote">収入 − 支出</small></article></div>
+      </section>
     </main>
 
     <button class="fab" id="addTransaction" aria-label="明細を追加">＋</button>
-    <nav class="bottom-nav"><button class="active">⌂<span>ホーム</span></button><button id="analyticsButton">◔<span>分析</span></button><button id="goalsButton">◎<span>貯金</span></button></nav>
+    <nav class="bottom-nav"><button class="active" data-view="household">⌂<span>家計</span></button><button data-view="goals">◎<span>目標</span></button><button data-view="analysis">◔<span>分析</span></button><button data-view="assets">◌<span>資産</span></button></nav>
 
     <dialog id="transactionDialog"><form method="dialog" id="transactionForm" class="modal">
       <div class="modal-header"><h2 id="transactionDialogTitle">明細を追加</h2><button class="close" type="button" formnovalidate onclick="this.closest('dialog').close()" aria-label="閉じる">×</button></div>
@@ -89,10 +102,11 @@
       <label>今月の支出予算 <small>任意</small><input id="monthlyBudgetInput" type="number" min="0" inputmode="numeric" placeholder="例：50000" /><span>円</span></label>
       <label>現在の資産合計 <small>現金・口座などの合計</small><input id="assetTotalInput" type="number" min="0" inputmode="numeric" placeholder="例：300000" /><span>円</span></label>
       <label>資産を確認した日<input id="assetAsOfInput" type="date" required /></label>
+      <label>管理開始日<input id="assetStartInput" type="date" required /></label>
       <button class="primary-button" value="default">保存する</button>
     </form></dialog>
 
     <dialog id="settingsDialog"><form method="dialog" class="modal"><div class="modal-header"><h2>データ管理</h2><button class="close" type="button" formnovalidate onclick="this.closest('dialog').close()" aria-label="閉じる">×</button></div><p class="settings-note">データはこの端末のブラウザ内に保存されています。</p><button class="secondary-button" id="exportButton" type="button">データをバックアップ</button><label class="import-label">バックアップを復元<input id="importInput" type="file" accept="application/json" /></label><button class="danger-button" id="clearData" type="button">すべてのデータを削除</button></form></dialog>
-    <script src="app.js?v=8"></script>
+    <script src="app.js?v=10"></script>
   </body>
 </html>
