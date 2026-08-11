@@ -17,7 +17,7 @@
       body[data-theme="blue"]{--tint:#007aff}body[data-theme="green"]{--tint:#34c759}body[data-theme="purple"]{--tint:#af52de}body[data-theme="orange"]{--tint:#ff9500}
       .theme-picker{margin:18px 0 8px}.theme-picker p{font-size:12px;font-weight:700;margin:0 0 9px}.theme-options{display:flex;gap:11px}.theme-choice{width:32px;height:32px;border:3px solid #fff;border-radius:50%;box-shadow:0 0 0 1px rgba(60,60,67,.2);cursor:pointer}.theme-choice.active{box-shadow:0 0 0 3px var(--tint)}.theme-choice[data-theme-choice="blue"]{background:#007aff}.theme-choice[data-theme-choice="green"]{background:#34c759}.theme-choice[data-theme-choice="purple"]{background:#af52de}.theme-choice[data-theme-choice="orange"]{background:#ff9500}
     </style>
-    <style>.ios-icon{width:22px;height:22px;display:block;stroke-linecap:round;stroke-linejoin:round}.icon-button{width:38px;height:38px;display:grid;place-items:center;border-radius:50%}.bottom-nav .ios-icon{width:21px;height:21px}.bottom-nav button{padding:0;min-width:42px}.modal input,.modal select{font-size:16px}</style>
+    <style>html{-webkit-text-size-adjust:100%}.ios-icon{width:22px;height:22px;display:block;stroke-linecap:round;stroke-linejoin:round}.icon-button{width:38px;height:38px;display:grid;place-items:center;border-radius:50%}.bottom-nav .ios-icon{width:21px;height:21px}.bottom-nav button{padding:0;min-width:42px}.modal input,.modal select,input,select,textarea{font-size:16px!important;touch-action:manipulation}</style>
     <title>まいにち家計簿</title>
   </head>
   <body>
@@ -114,6 +114,6 @@
     </form></dialog>
 
     <dialog id="settingsDialog"><form method="dialog" class="modal"><div class="modal-header"><h2>データ管理</h2><button class="close" type="button" formnovalidate onclick="this.closest('dialog').close()" aria-label="閉じる">×</button></div><p class="settings-note">データはこの端末のブラウザ内に保存されています。</p><button class="secondary-button" id="exportButton" type="button">データをバックアップ</button><label class="import-label">バックアップを復元<input id="importInput" type="file" accept="application/json" /></label><button class="danger-button" id="clearData" type="button">すべてのデータを削除</button></form></dialog>
-    <script src="app.js?v=15"></script>
+    <script src="app.js?v=16"></script>
   </body>
 </html>
