@@ -24,7 +24,7 @@
     <main class="app-shell">
       <header class="app-header">
         <p class="eyebrow">MONEY JOURNAL</p>
-        <div class="title-row"><h1>まいにち家計簿</h1><button class="icon-button" id="settingsButton" aria-label="設定"><svg class="ios-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.12 2.12-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.04 1.56V20h-3v-.08A1.7 1.7 0 0 0 10.66 18.4a1.7 1.7 0 0 0-1.88.34l-.06.06-2.12-2.12.06-.06A1.7 1.7 0 0 0 7 14.74a1.7 1.7 0 0 0-1.56-1.04H5.3v-3h.08A1.7 1.7 0 0 0 6.9 9.66 1.7 1.7 0 0 0 6.56 7.8L6.5 7.74l2.12-2.12.06.06a1.7 1.7 0 0 0 1.88.34A1.7 1.7 0 0 0 11.6 4.46V4.3h3v.08a1.7 1.7 0 0 0 1.04 1.56 1.7 1.7 0 0 0 1.88-.34l.06-.06 2.12 2.12-.06.06A1.7 1.7 0 0 0 19.3 9.6a1.7 1.7 0 0 0 1.56 1.04h.08v3h-.08A1.7 1.7 0 0 0 19.4 15Z"/></svg></button></div>
+        <div class="title-row"><h1>まいにち家計簿</h1><button class="icon-button" id="settingsButton" aria-label="設定"><svg class="ios-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2.8v2.1M12 19.1v2.1M21.2 12h-2.1M4.9 12H2.8M18.5 5.5 17 7M7 17l-1.5 1.5M18.5 18.5 17 17M7 7 5.5 5.5"/><circle cx="12" cy="12" r="7"/></svg></button></div>
       </header>
 
       <section class="period-bar" aria-label="表示月">
@@ -114,6 +114,6 @@
     </form></dialog>
 
     <dialog id="settingsDialog"><form method="dialog" class="modal"><div class="modal-header"><h2>データ管理</h2><button class="close" type="button" formnovalidate onclick="this.closest('dialog').close()" aria-label="閉じる">×</button></div><p class="settings-note">データはこの端末のブラウザ内に保存されています。</p><button class="secondary-button" id="exportButton" type="button">データをバックアップ</button><label class="import-label">バックアップを復元<input id="importInput" type="file" accept="application/json" /></label><button class="danger-button" id="clearData" type="button">すべてのデータを削除</button></form></dialog>
-    <script src="app.js?v=13"></script>
+    <script src="app.js?v=14"></script>
   </body>
 </html>
