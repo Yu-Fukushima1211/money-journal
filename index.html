@@ -18,6 +18,7 @@
       .theme-picker{margin:18px 0 8px}.theme-picker p{font-size:12px;font-weight:700;margin:0 0 9px}.theme-options{display:flex;gap:11px}.theme-choice{width:32px;height:32px;border:3px solid #fff;border-radius:50%;box-shadow:0 0 0 1px rgba(60,60,67,.2);cursor:pointer}.theme-choice.active{box-shadow:0 0 0 3px var(--tint)}.theme-choice[data-theme-choice="blue"]{background:#007aff}.theme-choice[data-theme-choice="green"]{background:#34c759}.theme-choice[data-theme-choice="purple"]{background:#af52de}.theme-choice[data-theme-choice="orange"]{background:#ff9500}
     </style>
     <style>html{-webkit-text-size-adjust:100%}.ios-icon{width:22px;height:22px;display:block;stroke-linecap:round;stroke-linejoin:round}.icon-button{width:38px;height:38px;display:grid;place-items:center;border-radius:50%}.bottom-nav .ios-icon{width:21px;height:21px}.bottom-nav button{padding:0;min-width:42px}.modal input,.modal select,input,select,textarea{font-size:16px!important;touch-action:manipulation}</style>
+    <style>.priority-button{border:0;background:rgba(0,122,255,.1);color:var(--tint);border-radius:8px;padding:5px 7px;font-size:10px;font-weight:700;white-space:nowrap}</style>
     <title>まいにち家計簿</title>
   </head>
   <body>
@@ -72,7 +73,7 @@
         <div class="section-heading"><div><p class="eyebrow">ASSETS</p><h2>資産全体</h2></div><button class="text-button" id="setupAssets">設定</button></div>
         <p class="view-note">現在の実残高を基準に、開始日からの収支を反映します。</p>
         <div class="asset-main"><span>現在の資産</span><strong id="assetCurrentValue">未設定</strong><small id="assetCurrentNote">最初に現在の資産を入力してください</small></div>
-        <div class="summary-grid"><article><span>管理開始時の資産</span><strong id="assetOpeningValue">—</strong><small id="assetOpeningNote">開始日を設定すると計算されます</small></article><article><span>開始からの純増減</span><strong id="assetChangeValue">—</strong><small id="assetChangeNote">収入 − 支出</small></article></div>
+        <div class="summary-grid"><article><span>管理開始時の資産</span><strong id="assetOpeningValue">—</strong><small id="assetOpeningNote">開始日を設定すると計算されます</small></article><article><span>開始からの純増減</span><strong id="assetChangeValue">—</strong><small id="assetChangeNote">収入 − 支出</small></article><article><span>目標に確保済み</span><strong id="assetReservedValue">—</strong><small>積立中の目標の合計</small></article><article><span>自由に使える資産</span><strong id="assetAvailableValue">—</strong><small>現在の資産 − 確保済み</small></article></div>
       </section>
     </main>
 
@@ -95,9 +96,11 @@
 
     <dialog id="goalDialog"><form method="dialog" id="goalForm" class="modal">
       <div class="modal-header"><h2>お金の目標を追加</h2><button class="close" type="button" formnovalidate onclick="this.closest('dialog').close()" aria-label="閉じる">×</button></div>
-      <label>目標の種類<select id="goalTypeInput"><option value="save">期間内に貯める</option><option value="purchase">買うために貯める</option><option value="restore">資産を戻す</option></select></label>
+      <label>目標の種類<select id="goalTypeInput"><option value="save">貯める</option><option value="restore">回復する</option></select></label>
       <label>目標の名前<input id="goalNameInput" maxlength="24" placeholder="例：旅行資金" /></label>
       <label>目標金額<input id="goalTargetInput" type="number" min="1" inputmode="numeric" placeholder="100000" required /><span>円</span></label>
+      <label>今ある資産から確保する額<input id="goalInitialInput" type="number" min="0" inputmode="numeric" placeholder="例：50000" /><span>円</span></label>
+      <label>優先度<select id="goalPriorityInput"><option value="highest">最優先</option><option value="high">高</option><option value="normal" selected>通常</option><option value="low">低</option></select></label>
       <label>開始日<input id="goalStartInput" type="date" required /></label>
       <label>目標期限 <small>任意</small><input id="goalDeadlineInput" type="date" /></label>
       <button class="primary-button" value="default">保存する</button>
@@ -114,6 +117,6 @@
     </form></dialog>
 
     <dialog id="settingsDialog"><form method="dialog" class="modal"><div class="modal-header"><h2>データ管理</h2><button class="close" type="button" formnovalidate onclick="this.closest('dialog').close()" aria-label="閉じる">×</button></div><p class="settings-note">データはこの端末のブラウザ内に保存されています。</p><button class="secondary-button" id="exportButton" type="button">データをバックアップ</button><label class="import-label">バックアップを復元<input id="importInput" type="file" accept="application/json" /></label><button class="danger-button" id="clearData" type="button">すべてのデータを削除</button></form></dialog>
-    <script src="app.js?v=16"></script>
+    <script src="app.js?v=17"></script>
   </body>
 </html>
